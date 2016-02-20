@@ -7,7 +7,7 @@
     "start": "./node_modules/.bin/babel-node server.js",
     "start-localhost": "./node_modules/.bin/babel-node localhost-server.js",
     "lint": "standard",
-    "build": "staticjinja build --srcpath=./public/templates --outpath=./public",
+    "build": "staticjinja build --srcpath=./public/templates --outpath=./public && !(git status -s public/*.* 2>/dev/null | grep -q \"^[\\s?]\")",
     "postinstall": "./node_modules/.bin/gulp"
   },
   "repository": {
@@ -45,5 +45,11 @@
     "ignore": [
       "public/js/jquery.js"
     ]
-  }
+  },
+  "devDependencies": {
+    "pre-commit": "^1.1.2"
+  },
+  "pre-commit": [
+    "build"
+  ]
 }
